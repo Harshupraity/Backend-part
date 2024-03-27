@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require('cors');
 const mongoose = require("mongoose");
 const hotelRouter= require("./routes/hotel.routes");//isko import kark app.use.
 const singlehotelRouter = require("./routes/singlehotel.router")
@@ -10,7 +11,7 @@ const  categoryRouter= require("./routes/category.routes");
 const wishlistRouter = require("./routes/wishlist.router")
 const app = express();
 
-
+app.use(cors());
 app.use(express.json());
 connectDB();
 const PORT= 3000;
