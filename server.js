@@ -7,29 +7,30 @@ const hotelDataAddedToDBRouter = require("./routes/dataimport.router");
 const categoryDataAddedToDBRouter = require("./routes/categoryimport.router")
 const connectDB = require("./config/dbconfig")
 const  categoryRouter= require("./routes/category.routes");
-// const authRouter = require("./routes/auth.router")
+const authRouter = require("./routes/auth.router")
 const wishlistRouter = require("./routes/wishlist.router")
 const app = express();
 
 app.use(cors());
 app.use(express.json());
 connectDB();
-const PORT= 3000;
+const PORT= 3500;
 app.get("/",(req,res)=>{
     res.send("Hello");
 })
+
 app.use("/api/singlehotel",singlehotelRouter)
 app.use("/api/hoteldata",hotelDataAddedToDBRouter)
 app.use("/api/categories",categoryDataAddedToDBRouter)
 app.use("/api/hotels",hotelRouter);
 app.use("/api/category",categoryRouter);
 app.use("/api/hotels",singlehotelRouter)
-// app.use("/api/auth",authRouter)
+app.use("/api/auth",authRouter)
 app.use("/api/wishlist",wishlistRouter);
 
 mongoose.connection.on("open",()=>{
     console.log("connected to Db");
     app.listen(process.env.PORT || PORT , ()=>{
-        console.log("server is Up and running");
+        console.log("server is Up and running at ",PORT);
     });
 })
